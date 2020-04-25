@@ -1,0 +1,9 @@
+{
+  "short_name": "Nico's React App",
+  "name": "A Default React App",
+  "icons": [
+
+  ],
+  "start_url": ".",
+  "display": "standalone"
+}

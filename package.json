@@ -1,0 +1,13 @@
+{
+  "name": "cra-template-nico",
+  "version": "1.0.0",
+  "main": "template.json",
+  "description": "A template for creating react apps, created by nico",
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "devDependencies": {
+
+  }
+}

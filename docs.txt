@@ -1,0 +1,3 @@
+How to create your own template (reference):
+- https://create-react-app.dev/docs/custom-templates/
+
