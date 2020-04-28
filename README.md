@@ -2,6 +2,14 @@
 
 This template seeks to provide the boilerplate that I usually prefer to start with, packaged in a convenient template that works with the create-react-app cli tool.
 
+Ships with:
+- [x] redux
+- [x] react-router-dom
+- [x] styled-components
+- [x] form logic
+- [ ] ui library -> chose not to include one, allows you to choose your own
+- [ ] electron config -> electron config npm script is in progress
+
 ### Usage:
 
 1) Clone this repo or make your own template!
