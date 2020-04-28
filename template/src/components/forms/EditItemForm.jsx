@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 
-const emptyUserForm = {
-  username: "",
-  password: "",
-  confirmPassword: "",
-}
-
-export const UserForm = ({
+export const EditItemForm = ({
+  itemData,
+  errors,
+  loading,
   onHandleSubmit
 }) => {
-  const [formData, setFormData] = useState(emptyUserForm)
+  const [formData, setFormData] = useState(undefined)
   const [formErrors, setFormErrors] = useState(null)
+
+  useEffect(() => {
+    console.log('item data passed to EditItemForm:', itemData)
+
+    setFormData(itemData)
+  }, [itemData])
 
   const handleChange = (e) => {
     setFormData({
@@ -24,56 +27,45 @@ export const UserForm = ({
   const handleSubmit = (e) => {
     e.preventDefault()
     
-    setFormErrors(null)
-
-    if(formData.username === "")
-      setFormErrors("username cannot be empty")
-    else if(formData.password.length < 6)
-      setFormErrors("password must be at least 6 characters")
-    else if(formData.password !== formData.confirmPassword)
-      setFormErrors("passwords must match")
+    // error-checking
+    if(formData.title === "")
+      setFormErrors("Title field cannot be empty")
     else {
       // submit form data
       onHandleSubmit(formData)
-      resetForm()
     }
   }
   
-  const resetForm = () => {
-    setFormData(emptyUserForm)
-    setFormErrors(null)
-  }
+  // const resetForm = () => setFormData(undefined)
 
+  if(!formData)
+    return (
+      <div className="section-container">
+        <p>Loading...</p>
+      </div>
+    )
   return (
     <StyledForm onSubmit={handleSubmit}>
-      {formErrors && <div><p className="error-text">{formErrors}</p></div>}
+      {errors && <div className="error-text"><p className="error-text">{errors}</p></div>}
+      {formErrors && <div className="error-text"><p className="error-text">{formErrors}</p></div>}
       <p className="form-item">
-        <label>Username: </label>
+        <label>Title: </label>
         <input
           autoFocus
           type="text"
-          name="username"
-          value={formData.username}
+          name="title"
+          disabled={loading}
+          value={itemData.title}
           onChange={handleChange}
         />
       </p>
       <p className="form-item">
-        <label>Password: </label>
+        <label>Desc: </label>
         <input
-          type="password"
-          placeholder="(min. 6 characters)"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-      </p>
-      <p className="form-item">
-        <label>Confirm: </label>
-        <input
-          type="password"
-          placeholder="Re-enter password"
-          name="confirmPassword"
-          value={formData.confirmPassword}
+          type="text"
+          name="desc"
+          disabled={loading}
+          value={itemData.desc}
           onChange={handleChange}
         />
       </p>
@@ -109,6 +101,7 @@ const StyledForm = styled.form`
 
       button {
         margin: 0 auto;
+        cursor: pointer;
       }
     }
   }

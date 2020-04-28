@@ -13,7 +13,10 @@ body {
 
 h2 { font-size: 22px; }
 h3 { font-size: 18px; }
-p { font-size: 16px; }
+p {
+  font-size: 16px;
+  font-family: sans-serif; /* for legibility */
+}
 
 .text-center {
   text-align: center;
@@ -38,5 +41,10 @@ p { font-size: 16px; }
 }
 
 .page-header h3 {
+  font-size: 24px;
+  font-family: Helvetica, sans-serif;
+}
 
+.error-text {
+  color: rgba(255,0,0, .77); /* red with reduced opacity */
 }

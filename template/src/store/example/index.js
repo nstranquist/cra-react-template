@@ -39,7 +39,23 @@ export const removeExample = (id) => ({
 
 // Example reducer
 const initialState = {
-  examples: [],
+  examples: [
+    {
+      id: "dljkfdjsf",
+      title: "First Item",
+      desc: "An example description"
+    },
+    {
+      id: "lkjsdfklj",
+      title: "Second Item",
+      desc: "An example description"
+    },
+    {
+      id: "sbkjhlkds",
+      title: "Third Item",
+      desc: "An example description"
+    },
+  ],
   loading: false,
   errors: null
 }

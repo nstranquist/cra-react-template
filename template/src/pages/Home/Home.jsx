@@ -16,10 +16,10 @@ const Home = ({
     <StyledHome className="home-page">
       <div className="page-container">
         <header className="page-header">
-          <h2>Home Page</h2>
+          <h3>Home Page</h3>
         </header>
         <section className="section-container">
-          Home Content
+          <p>Home Content</p>
         </section>
       </div>
     </StyledHome>

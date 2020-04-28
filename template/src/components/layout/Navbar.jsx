@@ -11,7 +11,7 @@ export const Navbar = ({
   useEffect(() => {
     const currentPath = location.pathname;
 
-    console.log('current path:', location.pathname)
+    console.log('current path:', currentPath)
 
     setActivePath(currentPath)
   }, [location])
@@ -22,7 +22,9 @@ export const Navbar = ({
         <div className="navbar-left">
           <Link to="/" className={(activePath==="/home" || activePath==="/") ? "nav-link active" : "nav-link"}>Home</Link>
           <Link to="/items" className={activePath==="/items" ? "nav-link active" : "nav-link"}>Items</Link>
+          {/* NOTE: this link's active class will not be toggled by default */}
           <Link to="/items/exampleItemId" className="nav-link">ItemDetail</Link>
+          <Link to="/items/add" className={activePath==="/items/add" ? "nav-link active" : "nav-link"}>Form</Link>
         </div>
         <div className="navbar-right">
           <Link to="/profile" className={activePath==="/profile" ? "nav-link active" : "nav-link"}>Profile</Link>
@@ -51,6 +53,7 @@ const StyledNavbar = styled.nav`
       .nav-link {
         display: block;
         padding: 10px 8px;
+        margin: 0 1px;
         // reset default link styles
         color: rgba(0,0,0,.9);
         text-decoration: none;

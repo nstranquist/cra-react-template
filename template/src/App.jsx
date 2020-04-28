@@ -27,6 +27,7 @@ export const App = () => {
           <Route exact path="/home" component={lazy(() => import('./pages/Home'))} />
           <Route exact path="/profile" component={lazy(() => import('./pages/Profile'))} />
           <Route exact path="/items" component={lazy(() => import('./pages/Items'))} />
+          <Route exact path="/items/add" component={lazy(() => import('./pages/Items/AddItem'))} />
           <Route exact path="/items/:itemId" component={lazy(() => import('./pages/ItemDetail'))} />
           <Route path="/" component={PageNotFound} />
         </Switch>
