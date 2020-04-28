@@ -12,3 +12,17 @@ This template seeks to provide the boilerplate that I usually prefer to start wi
 `yarn setup && yarn start`  
 
 After this, the new react app should open in a new window at http://localhost:3000  
+
+### Guide:
+
+Adding a New Page:
+- create a new folder in `/pages`, preferrably named how your Page is named
+- create `index.js` and `(ComponentName).js` inside the folder
+- specify the Route for the page in `App.js` (i.e. `<Route exact path="/profile" component={Profile} />`)
+- (optional) add a Link to the page in `components/layout/Navbar.js` with react-router's `<Link />` component
+
+Other Recommendations:
+- new components should be created in `/components` either as their own file or folder
+- keep any higher order components in a directory `/hoc` instead of in `/components`
+- keep utility functions in a directory `/utils`
+- UI frameworks should be able to be added with ease. Modifying `src/index.js` should usually be enough 
