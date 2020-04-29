@@ -1,45 +1,55 @@
 // src/store/example/index.js
 
 // Example types
-const ADD_EXAMPLE = "ADD_EXAMPLE"
-const UPDATE_EXAMPLE = "UPDATE_EXAMPLE"
-const REMOVE_EXAMPLE = "REMOVE_EXAMPLE"
-const GET_EXAMPLES = "GET_EXAMPLES"
+const ADD_ITEM = "ADD_ITEM"
+const UPDATE_ITEM = "UPDATE_ITEM"
+const REMOVE_ITEM = "REMOVE_ITEM"
+const GET_ITEMS = "GET_ITEMS"
+
+const SET_ACTIVE_ID = "SET_ACTIVE_ID"
+const CLEAR_ACTIVE_ID = "CLEAR_ACTIVE_ID"
 
 const SET_ERRORS = "SET_ERRORS"
 const CLEAR_ERRORS = "CLEAR_ERRORS"
 
 
 // Example action creators
-export const getExamples = () => (dispatch) => {
+export const getItems = () => (dispatch) => {
   // async call to an api
-  console.log('in getExamples thunk')
+  console.log('in getItems thunk')
 
   dispatch({
-    type: GET_EXAMPLES,
+    type: GET_ITEMS,
     payload: []
   })
 }
 
-export const addExample = (example) => ({
-  type: ADD_EXAMPLE,
-  example
+export const addItem = (item) => ({
+  type: ADD_ITEM,
+  item
 })
 
-export const updateExample = (example) => ({
-  type: UPDATE_EXAMPLE,
-  example
+export const updateItem = (item) => ({
+  type: UPDATE_ITEM,
+  item
 })
 
-export const removeExample = (id) => ({
-  type: REMOVE_EXAMPLE,
+export const removeItem = (id) => ({
+  type: REMOVE_ITEM,
   id
 })
+
+export const setActiveId = id => ({
+  type: SET_ACTIVE_ID,
+  id
+})
+
+export const clearActiveId = () => ({ type: SET_ACTIVE_ID })
 
 
 // Example reducer
 const initialState = {
-  examples: [
+  items: [
     {
       id: "dljkfdjsf",
       title: "First Item",
@@ -57,7 +67,8 @@ const initialState = {
     },
   ],
   loading: false,
-  errors: null
+  errors: null,
+  activeId: undefined
 }
 
 export default (
@@ -65,35 +76,45 @@ export default (
   action
 ) => {
   switch(action.type) {
-    case GET_EXAMPLES:
+    case GET_ITEMS:
       return {
         ...state,
-        examples: action.examples,
+        items: action.items,
         loading: false,
         errors: null
       }
-    case ADD_EXAMPLE:
+    case ADD_ITEM:
       return {
         ...state,
-        examples: [
-          ...state.examples,
-          action.example
+        items: [
+          ...state.items,
+          action.item
         ]
       }
-    case UPDATE_EXAMPLE:
-      let newExamples = state.examples.map(example => {
-        if(example.id === action.example.id)
-          example = action.example
-        return example;
+    case UPDATE_ITEM:
+      let newItems = state.items.map(item => {
+        if(item.id === action.item.id)
+          item = action.item
+        return item;
       })
       return {
         ...state,
-        examples: newExamples
+        items: newItems,
       }
-    case REMOVE_EXAMPLE:
+    case REMOVE_ITEM:
       return {
         ...state,
-        examples: state.examples.filter(example => example.id !== action.id)
+        items: state.items.filter(item => item.id !== action.id)
+      }
+    case SET_ACTIVE_ID:
+      return {
+        ...state,
+        activeId: action.id
+      }
+    case CLEAR_ACTIVE_ID:
+      return {
+        ...state,
+        activeId: undefined
       }
     case SET_ERRORS:
       return {

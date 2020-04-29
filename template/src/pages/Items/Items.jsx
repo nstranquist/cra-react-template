@@ -6,25 +6,23 @@ import styled from 'styled-components'
 import { ItemPreview } from './ItemPreview'
 import { UnstyledLink } from '../../styles/link.styled'
 import { boxShadows } from '../../styles/shadows.style'
+// import redux
+import { removeItem } from '../../store/example'
 
 const Items = ({
   items,
   loading,
-  errors
+  errors,
+  removeItem,
 }) => {
-
-  const onHandleEdit = itemData => {
-    console.log('editing item with data:', itemData)
-
-    // Make api 'PUT' call here
-
-  }
 
   const onHandleDelete = id => {
     console.log('deleting item with id:', id)
 
     // Make api 'DELETE' call here
 
+    // delete item in redux if api call is successful
+    removeItem(id)
   }
 
   return (
@@ -42,7 +40,6 @@ const Items = ({
             <UnstyledLink to={`/items/${item.id}`} key={index}>
               <ItemPreview
                 item={item}
-                onHandleEdit={onHandleEdit}
                 onHandleDelete={onHandleDelete}
               />
             </UnstyledLink>
@@ -61,14 +58,14 @@ const Items = ({
 }
 
 const mapStateToProps = (state) => ({
-  items: state.example.examples,
+  items: state.example.items,
   loading: state.example.loading,
   errors: state.example.errors
 })
 
 export const ConnectedItems = connect(
   mapStateToProps,
-  {  }
+  { removeItem }
 )(Items)
 
 const StyledItems = styled.div`

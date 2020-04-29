@@ -3,45 +3,50 @@ import styled from 'styled-components'
 
 
 export const EditItemForm = ({
-  itemData,
+  item,
   errors,
   loading,
   onHandleSubmit
 }) => {
-  const [formData, setFormData] = useState(undefined)
+  const [itemData, setItemData] = useState(undefined)
   const [formErrors, setFormErrors] = useState(null)
 
   useEffect(() => {
-    console.log('item data passed to EditItemForm:', itemData)
+    console.log('item passed to EditItemForm:', item)
 
-    setFormData(itemData)
-  }, [itemData])
+    setItemData(item)
+
+    return () => {
+      setItemData(undefined)
+      setFormErrors(undefined)
+    }
+  }, [item])
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setItemData({
+      ...itemData,
       [e.target.name]: e.target.value
     })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    setFormErrors(undefined)
     
     // error-checking
-    if(formData.title === "")
+    if(itemData.title === "")
       setFormErrors("Title field cannot be empty")
     else {
       // submit form data
-      onHandleSubmit(formData)
+      onHandleSubmit(itemData)
     }
   }
   
-  // const resetForm = () => setFormData(undefined)
-
-  if(!formData)
+  if(!itemData)
     return (
       <div className="section-container">
-        <p>Loading...</p>
+        {/* <p>Loading...</p> */}
       </div>
     )
   return (
@@ -69,6 +74,8 @@ export const EditItemForm = ({
           onChange={handleChange}
         />
       </p>
+      {/* Other form fields here: */}
+
       <p className="form-button">
         <button type="submit">Submit</button>
       </p>
